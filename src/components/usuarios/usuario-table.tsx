@@ -1,11 +1,16 @@
 import { Button } from "../ui/button";
 import type { Usuario } from "../../types/usuario";
+import { useState } from "react";
+import { Modal } from "../fondos/fondo-usuario/modal";
 
 interface UsuarioTableProps {
   usuarios: Usuario[];
 }
 
 export function UsuarioTable({ usuarios }: UsuarioTableProps) {
+  const [selectedUsuario, setSelectedUsuario] = useState<Usuario | null>(null);
+  const [isViewDetailsOpen, setIsViewDetailsOpen] = useState(false);
+
   return (
     <div>
       <table className="min-w-full border-collapse">
@@ -30,7 +35,7 @@ export function UsuarioTable({ usuarios }: UsuarioTableProps) {
               <td className="text-sm p-4">{usuario.cod_ref}</td>
               <td className="text-sm p-4">{usuario.cod_usuario_ref}</td>
               <td className="p-4">
-                <div className="flex gap-2">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
                   <Button
                     variant="default"
                     className="bg-green-100 hover:bg-green-200 text-green-600"
@@ -46,12 +51,36 @@ export function UsuarioTable({ usuarios }: UsuarioTableProps) {
                   >
                     Eliminar
                   </Button>
+                  <Button
+                    className="bg-blue-100 text-blue-600 hover:bg-blue-200"
+                    size={"lg"}
+                    onClick={() => {
+                      setSelectedUsuario(usuario);
+                      setIsViewDetailsOpen(true);
+                    }}
+                  >
+                    Ver Detalles
+                  </Button>
                 </div>
               </td>
             </tr>
           ))}
         </tbody>
       </table>
+
+      {isViewDetailsOpen && selectedUsuario && (
+        <div
+          className="fixed inset-0 bg-black/50 flex items-center justify-center z-50"
+          onClick={() => setIsViewDetailsOpen(false)}
+        >
+          <div onClick={(e) => e.stopPropagation()}>
+            <Modal
+              onClose={() => setIsViewDetailsOpen(false)}
+              usuario={selectedUsuario}
+            />
+          </div>
+        </div>
+      )}
     </div>
   );
 }
