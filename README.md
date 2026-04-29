@@ -1,73 +1,81 @@
-# React + TypeScript + Vite
+# Inversiones Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Aplicacion web para administrar usuarios y fondos de inversion. Este frontend consume una API REST y permite consultar informacion de usuarios, fondos y fondos asociados a cada usuario.
 
-Currently, two official plugins are available:
+## Que hace el proyecto
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- Muestra una vista principal con navegacion lateral entre secciones.
+- Seccion de usuarios con tabla de datos basicos.
+- Seccion de fondos con tabla de fondos disponibles.
+- Modal de detalle por usuario para ver sus fondos asociados.
+- Accion para simular meses sobre un fondo del usuario desde el modal de detalle.
 
-## React Compiler
+## Que funciona actualmente
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- Consulta de usuarios desde la API.
+- Consulta de fondos desde la API.
+- Consulta de fondos por usuario.
+- Simulacion de meses en un fondo-usuario (refrescando los datos al finalizar).
+- Estados de carga, error y listas vacias en las vistas principales.
 
-## Expanding the ESLint configuration
+## Alcance actual
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+Hay botones visibles de agregar, editar y eliminar (usuarios/fondos), pero varias de esas acciones aun no estan conectadas a formularios o endpoints en la UI actual.
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## Stack tecnico
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+- React 19
+- TypeScript
+- Vite
+- Tailwind CSS
+- Componentes UI tipo shadcn
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## Requisitos
+
+- Node.js 18+
+- npm
+- Backend/API en ejecucion
+
+## Configuracion
+
+Este proyecto usa la variable de entorno `VITE_API_URL` para apuntar al backend.
+
+1. Crea un archivo `.env` en la raiz del proyecto.
+2. Define la URL base de tu API:
+
+```env
+VITE_API_URL=http://localhost:3000
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Si no defines `VITE_API_URL`, el frontend intentara consumir rutas relativas (por ejemplo `/usuarios`, `/fondos`, etc.) en el mismo host donde se sirva la app.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## Como ejecutar el proyecto
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+1. Instalar dependencias:
+
+```bash
+npm install
 ```
+
+2. Levantar en modo desarrollo:
+
+```bash
+npm run dev
+```
+
+3. Abrir en el navegador la URL que muestra Vite (normalmente `http://localhost:5173`).
+
+## Scripts disponibles
+
+- `npm run dev`: inicia el servidor de desarrollo.
+- `npm run build`: compila TypeScript y genera build de produccion.
+- `npm run preview`: sirve localmente el build generado.
+- `npm run lint`: ejecuta ESLint.
+
+## Estructura general
+
+- `src/pages`: vistas principales.
+- `src/components`: componentes de UI y secciones de negocio.
+- `src/hooks`: hooks para carga de datos y estado.
+- `src/api`: funciones para consumir endpoints REST.
+- `src/types`: tipados TypeScript del dominio.
