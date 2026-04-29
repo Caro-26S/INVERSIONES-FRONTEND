@@ -5,6 +5,7 @@ import {
   SidebarTrigger,
 } from "../components/ui/sidebar";
 import { HomeSidebar } from "../components/sidebar/home-sidebar";
+import { UsuarioSection } from "../components/usuarios/usuario-section";
 
 type Section = "usuario" | "fondos";
 
@@ -25,7 +26,7 @@ export function Home() {
         </header>
 
         <main className="p-6">
-          {activeSection === "usuario" && <div>Próximamente...</div>}
+          {activeSection === "usuario" && <UsuarioSection />}
           {activeSection === "fondos" && <div>Próximamente...</div>}
         </main>
       </SidebarInset>
