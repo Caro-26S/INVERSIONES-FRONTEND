@@ -1,9 +1,13 @@
 import { Button } from "../ui/button";
 import { UsuarioTable } from "./usuario-table";
 import { useUsuario } from "../../hooks/use-usuario";
+// import { ModalAction } from "./modal-action";
 
 export function UsuarioSection() {
   const { usuarios, loading, error } = useUsuario();
+  // const [isAddOpen, setIsAddOpen] = useState(false);
+  // const [isEditOpen, setIsEditOpen] = useState(false);
+  // const [selectedUsuario, setSelectedUsuario] = useState<Usuario | null>(null);
 
   console.log("Usuarios:", error);
 
@@ -18,6 +22,15 @@ export function UsuarioSection() {
         Agregar Usuario
       </Button>
       <UsuarioTable usuarios={usuarios} />
+
+      {/* {isAddOpen && <ModalAction onClose={() => setIsAddOpen(false)} />}
+
+      {isEditOpen && selectedUsuario && (
+        <ModalAction
+          onClose={() => setIsEditOpen(false)}
+          usuario={selectedUsuario}
+        />
+      )} */}
     </div>
   );
 }

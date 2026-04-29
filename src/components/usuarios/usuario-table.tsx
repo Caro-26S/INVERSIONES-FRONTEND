@@ -5,9 +5,10 @@ import { Modal } from "../fondos/fondo-usuario/modal";
 
 interface UsuarioTableProps {
   usuarios: Usuario[];
+  onEdit?: (usuario: Usuario) => void;
 }
 
-export function UsuarioTable({ usuarios }: UsuarioTableProps) {
+export function UsuarioTable({ usuarios, onEdit }: UsuarioTableProps) {
   const [selectedUsuario, setSelectedUsuario] = useState<Usuario | null>(null);
   const [isViewDetailsOpen, setIsViewDetailsOpen] = useState(false);
 
@@ -40,7 +41,7 @@ export function UsuarioTable({ usuarios }: UsuarioTableProps) {
                     variant="default"
                     className="bg-green-100 hover:bg-green-200 text-green-600"
                     size={"lg"}
-                    // onClick={() => onEdit?.(usuario)}
+                    onClick={() => onEdit?.(usuario)}
                   >
                     Editar
                   </Button>

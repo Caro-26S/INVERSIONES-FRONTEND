@@ -1,6 +1,8 @@
 import type { FondoUsuario } from "../types/fondo-usuario";
 
-const API_BASE_URL = import.meta.env.VITE_API_URL;
+const API_BASE_URL =
+  (import.meta as unknown as { env?: { VITE_API_URL?: string } }).env
+    ?.VITE_API_URL ?? "";
 
 export async function getFondosUsuario(
   usuarioDoc: string,
