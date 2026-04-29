@@ -6,6 +6,7 @@ import {
 } from "../components/ui/sidebar";
 import { HomeSidebar } from "../components/sidebar/home-sidebar";
 import { UsuarioSection } from "../components/usuarios/usuario-section";
+import { FondoSection } from "../components/fondos/fondo-section";
 
 type Section = "usuario" | "fondos";
 
@@ -27,7 +28,7 @@ export function Home() {
 
         <main className="p-6">
           {activeSection === "usuario" && <UsuarioSection />}
-          {activeSection === "fondos" && <div>Próximamente...</div>}
+          {activeSection === "fondos" && <FondoSection />}
         </main>
       </SidebarInset>
     </SidebarProvider>

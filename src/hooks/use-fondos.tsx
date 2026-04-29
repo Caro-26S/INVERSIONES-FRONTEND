@@ -1,26 +1,26 @@
 import { useState, useEffect } from "react";
-import type { Usuario } from "../types/usuario";
-import { getUsuarios } from "../api/usuario.api";
+import type { Fondo } from "../types/fondo";
+import { getFondos } from "../api/fondo.api";
 
-interface UseUsuarioResult {
-  usuarios: Usuario[] | null;
-  setUsuarios: (usuarios: Usuario[] | null) => void;
+interface UseFondoResult {
+  fondos: Fondo[] | null;
+  setFondos: (fondos: Fondo[] | null) => void;
   loading: boolean;
   error: string | null;
 }
 
-export function useUsuario(): UseUsuarioResult {
-  const [usuarios, setUsuarios] = useState<Usuario[] | null>(null);
+export function useFondo(): UseFondoResult {
+  const [fondos, setFondos] = useState<Fondo[] | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     let cancelled = false;
 
-    getUsuarios()
+    getFondos()
       .then((data) => {
         if (!cancelled) {
-          setUsuarios(data);
+          setFondos(data);
           setLoading(false);
         }
       })
@@ -36,5 +36,5 @@ export function useUsuario(): UseUsuarioResult {
     };
   }, []);
 
-  return { usuarios, setUsuarios, loading, error };
+  return { fondos, setFondos, loading, error };
 }

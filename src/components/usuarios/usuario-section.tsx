@@ -3,7 +3,7 @@ import { UsuarioTable } from "./usuario-table";
 import { useUsuario } from "../../hooks/use-usuario";
 
 export function UsuarioSection() {
-  const { usuarios, loading, error } = useUsuario(null);
+  const { usuarios, loading, error } = useUsuario();
 
   console.log("Usuarios:", error);
 
