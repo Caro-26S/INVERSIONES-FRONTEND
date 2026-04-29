@@ -14,7 +14,9 @@ export function UsuarioSection() {
 
   return (
     <div>
-      <Button>Agregar Usuario</Button>
+      <Button className="mb-4 bg-blue-100 text-blue-600 hover:bg-blue-200">
+        Agregar Usuario
+      </Button>
       <UsuarioTable usuarios={usuarios} />
     </div>
   );
